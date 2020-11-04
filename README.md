@@ -43,13 +43,15 @@ Create Spring Boot API that allows uploading and serving files.
     
 5. Verify that the *getFileByName* endpoint works and it does returns the *lion.jpeg* file created on step 2 when requested by name.
 
-
 6. Implement the *handleFileUpload* method. Make sure you return the static url to access the uploaded file by using the *getFileByName* endpoint.
 
     ````Java
        //Stores the file into MongoDB
         gridFsTemplate.store(file.getInputStream(), fileName, file.getContentType());
     ````
+
+![Lion](/img/1.PNG)
+
 
 ## Part 2: Integrate file uploader with React JS project
 
@@ -126,3 +128,10 @@ Create Spring Boot API that allows uploading and serving files.
     6. Implement the logic for the following scenario: if the file is not an image but a pdf file, then a file icon appears on the Todo component. When the file icon is clicked then the user gets redirected to the download page.
     
 7. Verify that the project works as expected.
+
+
+## License
+[MIT License ](/LICENSE)
+
+## Autor
+Luis Alejandro Jaramillo Rincon
