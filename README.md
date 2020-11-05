@@ -1,7 +1,12 @@
-# 2.4 MongoDB Files API
+# 2.4 MongoDB Files API (Backend :new_moon_with_face:)
 Create Spring Boot API that allows uploading and serving files.
 
 
+
+## Credenciales para ingresar
+
+* Email:luis@mail.com
+* Pwd: ieti123
 ## Part 1: Implement a File uploader API
 
 1. Clone this project and change the Database configuration with your own connection string in the following file:
