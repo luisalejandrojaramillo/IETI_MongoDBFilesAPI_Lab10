@@ -1,7 +1,9 @@
 package eci.ieti.controller;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.client.gridfs.model.GridFSFile;
+import eci.ieti.data.TodoRepository;
 import eci.ieti.data.model.Todo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -26,6 +28,9 @@ public class RESTController {
     @Autowired
     public GridFsTemplate gridFsTemplate;
 
+    @Autowired
+    TodoRepository todoRepository;
+
     @RequestMapping("/files/{filename}")
     public ResponseEntity<InputStreamResource> getFileByName(@PathVariable String filename) throws IOException {
         GridFSFile file = gridFsTemplate.findOne(new Query().addCriteria(Criteria.where("filename").is(filename)));
@@ -43,22 +48,22 @@ public class RESTController {
     @PostMapping("/files")
     public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) throws IOException {
         gridFsTemplate.store(file.getInputStream(),file.getName(),file.getContentType());
-        redirectAttributes.addFlashAttribute("message","File "+ file.getName() + "successfully uploaded");
-        return "redirect:/";
+        //redirectAttributes.addFlashAttribute("message","File "+ file.getName() + "successfully uploaded");
+        return "api/files/"+file.getOriginalFilename();
     }
 
     @CrossOrigin("*")
     @PostMapping("/todo")
     public Todo createTodo(@RequestBody Todo todo) {
         //TODO implement method
-        return null;
+        return todoRepository.save(todo);
     }
 
     @CrossOrigin("*")
     @GetMapping("/todo")
     public List<Todo> getTodoList() {
         //TODO implement method
-        return null;
+        return todoRepository.findAll();
     }
 
 }
